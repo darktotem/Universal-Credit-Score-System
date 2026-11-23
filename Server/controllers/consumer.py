@@ -6,6 +6,7 @@ from models import Subscriber
 from models.audit_log import AuditLog, log_audit
 from models.consumer import ConsentGrant, Consumer, utcnow
 from schemas.consumer_schema import ConsentGrantSchema, ConsumerProfileSchema
+from services.ingestion_services import link_pending_tradelines
 from services import report_builder
 from utils.masking import viewer_from_claims
 from utils.rbac import require_roles, require_self_or_roles
@@ -66,6 +67,7 @@ def upsert_profile():
         db.session.add(c)
     for key, value in data.items():
         setattr(c, key, value)
+        link_pending_tradelines(c)
 
     log_audit("consumer.profile_create" if created else "consumer.profile_update",
               "consumer", uid, consumer_id=uid, commit=False)

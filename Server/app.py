@@ -3,6 +3,7 @@ from marshmallow import ValidationError
 
 from config import Config
 from extensions import cors, db, jwt, migrate
+from controllers.subscriber import subscriber_bp
 from controllers.consumer import consumer_bp
 
 
@@ -20,6 +21,7 @@ def create_app(config_class=Config):
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(consumer_bp)
+    app.register_blueprint(subscriber_bp)
     @jwt.unauthorized_loader
     def _missing(reason):
         return jsonify(error="unauthorized", message=reason), 401
