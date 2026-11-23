@@ -21,6 +21,7 @@ gunicorn = "*"
 psycopg = {extras = ["binary"], version = "*"}
 flasgger = "*"
 python-dotenv = "*"
+flask-cors = "*"
 
 [dev-packages]
 pytest = "*"
