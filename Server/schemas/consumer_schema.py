@@ -1,5 +1,4 @@
-from marshmallow import Schema, fields, validate
-from marshmallow import post_load
+from marshmallow import Schema, fields, validate, post_load
 from utils.validators import normalize_national_id, validate_national_id
 
 PURPOSES = ["credit_application", "account_review", "collections"]
